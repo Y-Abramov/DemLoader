@@ -1,0 +1,26 @@
+[
+  {
+    "id": "cop30",
+    "name": "Copernicus GLO-30 (30 м)",
+    "baseUrl": "https://copernicus-dem-30m.s3.amazonaws.com",
+    "resolutionMarker": 10,
+    "stepMetres": 30.0,
+    "requiresKey": false,
+    "userAgent": "AbrDemLoader/0.1 (+https://abrmove.ru)",
+    "copyright": "Copernicus DEM GLO-30, © DLR e.V. и Airbus Defence and Space GmbH, предоставлено программой COPERNICUS Европейского союза и ЕКА",
+    "verticalDatum": "EGM2008",
+    "surfaceKind": "DSM"
+  },
+  {
+    "id": "cop90",
+    "name": "Copernicus GLO-90 (90 м)",
+    "baseUrl": "https://copernicus-dem-90m.s3.amazonaws.com",
+    "resolutionMarker": 30,
+    "stepMetres": 90.0,
+    "requiresKey": false,
+    "userAgent": "AbrDemLoader/0.1 (+https://abrmove.ru)",
+    "copyright": "Copernicus DEM GLO-90, © DLR e.V. и Airbus Defence and Space GmbH, предоставлено программой COPERNICUS Европейского союза и ЕКА",
+    "verticalDatum": "EGM2008",
+    "surfaceKind": "DSM"
+  }
+]

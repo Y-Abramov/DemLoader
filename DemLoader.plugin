@@ -1,0 +1,117 @@
+{
+  "assemblies": {
+    "dem_loader": {
+      "assembly": "Abr.DemLoader.dll, DemLoader.PluginHost"
+    }
+  },
+
+  "variables": {
+    "dem_tab_visible": "$(if,$(sysvar,task_dem_loader),0,1)",
+    "dem_btn_checked": "$(if,$(sysvar,task_dem_loader),20,16)"
+  },
+
+  "actions": {
+    "dem_about": {
+      "cmd": "about_demloader",
+      "title": "О модуле",
+      "description": "Информация о модуле Загрузка рельефа",
+      "icon": "abr_about"
+    },
+    "dem_load": {
+      "cmd": "dem_load",
+      "title": "Загрузить",
+      "description": "Загрузить рельеф из открытых данных",
+      "icon": "dem_load"
+    },
+    "dem_update": {
+      "cmd": "dem_update",
+      "title": "Обновить",
+      "description": "Перекачать рельеф по сохранённому заданию",
+      "icon": "dem_update"
+    },
+    "dem_erase": {
+      "cmd": "dem_erase",
+      "title": "Удалить",
+      "description": "Удалить модель рельефа, созданную этим модулем",
+      "icon": "dem_erase"
+    },
+    "dem_export": {
+      "cmd": "dem_export",
+      "title": "Выгрузить тайлы",
+      "description": "Сохранить сырые GeoTIFF по области без построения поверхности",
+      "icon": "dem_export"
+    },
+    "dem_settings": {
+      "cmd": "dem_settings",
+      "title": "Настройки",
+      "description": "Ключ OpenTopography, лимит точек, кэш",
+      "icon": "dem_settings"
+    },
+    "id_show_dem_loader_tab": {
+      "cmd": "$(if,$(sysvar,task_dem_loader),sysvar task_dem_loader 0,sysvar task_dem_loader 1)",
+      "title": "Загрузка рельефа",
+      "description": "Открыть вкладку Загрузка рельефа",
+      "icon": "dem_module",
+      "flags": "$(dem_btn_checked)"
+    },
+    "id_hide_dem_loader_tab": {
+      "cmd": "sysvar task_dem_loader 0",
+      "title": "Закрыть",
+      "icon": "ic_close"
+    }
+  },
+
+  "ribbon": {
+    "rbproj.modules": {
+      "items": [
+        { "group": "module_dem_loader", "title": "Загрузка рельефа" }
+      ]
+    },
+    "rbproj.modules.module_dem_loader": {
+      "items": [
+        { "button": "id_show_dem_loader_tab", "size": "large" }
+      ]
+    },
+
+    "rbproj.dem_loader": {
+      "items": [
+        { "group": "dem_build",        "title": "Рельеф" },
+        { "group": "dem_data",         "title": "Данные" },
+        { "group": "dem_settings_grp", "title": "Настройки" },
+        { "group": "dem_close",        "title": "Закрыть" }
+      ]
+    },
+    "rbproj.dem_loader.dem_build": {
+      "items": [
+        { "button": "dem_load", "size": "large" },
+        { "button": "dem_update", "size": "large" },
+        { "button": "dem_erase", "size": "large" }
+      ]
+    },
+    "rbproj.dem_loader.dem_data": {
+      "items": [
+        { "button": "dem_export", "size": "large" }
+      ]
+    },
+    "rbproj.dem_loader.dem_settings_grp": {
+      "items": [
+        { "button": "dem_settings", "size": "large" },
+        { "button": "dem_about", "size": "small" }
+      ]
+    },
+    "rbproj.dem_loader.dem_close": {
+      "items": [
+        { "button": "id_hide_dem_loader_tab", "size": "large" }
+      ]
+    }
+  },
+
+  "menubars": {
+    "rbproj.modules_menu": {
+      "items": [ { "id": "dem_menu", "title": "Загрузка рельефа" } ]
+    },
+    "rbproj.modules_menu.dem_menu": {
+      "items": [ "dem_load", "dem_update", "dem_erase", "-", "dem_export", "-", "dem_settings", "-", "dem_about" ]
+    }
+  }
+}

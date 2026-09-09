@@ -1,0 +1,10 @@
+{
+  "name": "dem-loader",
+  "caption": "Загрузка рельефа",
+  "version": "1.0.0",
+  "description": "Загрузка рельефа местности из открытых данных (Copernicus DEM, OpenTopography) и построение цифровой модели местности по участку, полилинии или коридору вдоль трассы.",
+  "author": "Yaroslav I. Abramov",
+  "compatibility": [
+    "Топоматик Robur — Автомобильные дороги"
+  ]
+}

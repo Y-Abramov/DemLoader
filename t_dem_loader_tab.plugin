@@ -1,0 +1,13 @@
+{
+  "variables": {
+    "dem_tab_visible": "$(if,$(sysvar,task_dem_loader),0,1)"
+  },
+
+  "ribbon": {
+    "rbproj": {
+      "items": [
+        { "group": "dem_loader", "title": "Загрузка рельефа", "flags": "$(dem_tab_visible)" }
+      ]
+    }
+  }
+}

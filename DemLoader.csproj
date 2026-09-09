@@ -1,0 +1,90 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Abr.DemLoader</AssemblyName>
+    <RootNamespace>DemLoader</RootNamespace>
+    <Version>1.0.0</Version>
+    <LangVersion>latest</LangVersion>
+    <RoburInstallDir Condition="'$(RoburInstallDir)' == ''">C:\Program Files\Topomatic Robur Road 16.0</RoburInstallDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="Topomatic.ApplicationPlatform">
+      <HintPath>$(RoburInstallDir)\Topomatic.ApplicationPlatform.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Topomatic.Cad.Foundation">
+      <HintPath>$(RoburInstallDir)\Topomatic.Cad.Foundation.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Topomatic.Cad.View">
+      <HintPath>$(RoburInstallDir)\Topomatic.Cad.View.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Topomatic.ComponentModel">
+      <HintPath>$(RoburInstallDir)\Topomatic.ComponentModel.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Topomatic.Controls">
+      <HintPath>$(RoburInstallDir)\Topomatic.Controls.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Topomatic.Dwg">
+      <HintPath>$(RoburInstallDir)\Topomatic.Dwg.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Topomatic.Dwg.Layer">
+      <HintPath>$(RoburInstallDir)\Topomatic.Dwg.Layer.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Topomatic.Dtm">
+      <HintPath>$(RoburInstallDir)\Topomatic.Dtm.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Topomatic.Sfc">
+      <HintPath>$(RoburInstallDir)\Topomatic.Sfc.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Topomatic.Proj">
+      <HintPath>$(RoburInstallDir)\Topomatic.Proj.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Topomatic.Proj.Runtime">
+      <HintPath>$(RoburInstallDir)\Topomatic.Proj.Runtime.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Topomatic.FoundationClasses">
+      <HintPath>$(RoburInstallDir)\Topomatic.FoundationClasses.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Topomatic.Stg">
+      <HintPath>$(RoburInstallDir)\Topomatic.Stg.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Topomatic.Visualization">
+      <HintPath>$(RoburInstallDir)\Topomatic.Visualization.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\Bootstrap\*.cs" LinkBase="Shared\Bootstrap" />
+    <Compile Include="..\Shared\Sdk\*.cs" LinkBase="Shared\Sdk" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="DemLoader.plugin" CopyToOutputDirectory="Always" />
+    <None Include="t_dem_loader_tab.plugin" CopyToOutputDirectory="Always" />
+    <None Include="icons\**\*.png" CopyToOutputDirectory="PreserveNewest" />
+    <EmbeddedResource Include="abr.ico" />
+    <EmbeddedResource Include="Core\Sources\builtin-sources.json"
+                      LogicalName="DemLoader.Core.Sources.builtin-sources.json" />
+  </ItemGroup>
+
+</Project>
