@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Topomatic.ApplicationPlatform.Core;
 using Topomatic.ApplicationPlatform.Plugins;
+using Topomatic.Controls.Dialogs;
 using Topomatic.Cad.View;
 using Topomatic.Dtm;
 using Topomatic.Proj.CoordinateSystems;
@@ -36,7 +37,7 @@ namespace DemLoader
         private void Load()
         {
             IProjectModel root = FindProjectRoot();
-            if (root == null) { MessageBox.Show("Проект не открыт."); return; }
+            if (root == null) { MessageDlg.Show("Проект не открыт."); return; }
 
             var sources = SourceCatalog.Load(SourceCatalog.DefaultUserPath);
             var settings = new DemSettingsStore(DemSettingsStore.DefaultPath).Load();
@@ -82,7 +83,7 @@ namespace DemLoader
                     }
                     catch (CoordSystemException error)
                     {
-                        MessageBox.Show(error.Message, "Загрузка рельефа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageDlg.Show(error.Message, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                         continue;
                     }
 
@@ -125,11 +126,11 @@ namespace DemLoader
 
             if (!built.Ok)
             {
-                MessageBox.Show(built.Error, "Загрузка рельефа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageDlg.Show(built.Error, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 return;
             }
 
-            MessageBox.Show(built.Describe(), "Загрузка рельефа", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageDlg.Show(built.Describe(), MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
 
         [cmd("dem_update")]
@@ -138,7 +139,7 @@ namespace DemLoader
             var models = FindOurTerrainModels();
             if (models.Count == 0)
             {
-                MessageBox.Show("В проекте нет моделей рельефа, созданных этим модулем.", "Загрузка рельефа");
+                MessageDlg.Show("В проекте нет моделей рельефа, созданных этим модулем.");
                 return;
             }
 
@@ -148,8 +149,8 @@ namespace DemLoader
             DemJob job = JobStore.Load(target);
             if (job == null)
             {
-                MessageBox.Show("Не удалось прочитать задание загрузки этой модели.", "Загрузка рельефа",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageDlg.Show("Не удалось прочитать задание загрузки этой модели.",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 return;
             }
 
@@ -161,13 +162,13 @@ namespace DemLoader
             }
             catch (FormatException)
             {
-                MessageBox.Show("В задании этой модели не сохранена система координат - обновление невозможно.",
-                    "Загрузка рельефа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageDlg.Show("В задании этой модели не сохранена система координат - обновление невозможно.",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 return;
             }
             catch (CoordSystemException error)
             {
-                MessageBox.Show(error.Message, "Загрузка рельефа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageDlg.Show(error.Message, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 return;
             }
 
@@ -191,23 +192,23 @@ namespace DemLoader
 
             if (!built.Ok)
             {
-                MessageBox.Show(built.Error, "Загрузка рельефа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageDlg.Show(built.Error, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 return;
             }
 
-            MessageBox.Show(built.Describe(), "Загрузка рельефа", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageDlg.Show(built.Describe(), MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
 
         [cmd("dem_erase")]
         private void Erase()
         {
             IProjectModel root = FindProjectRoot();
-            if (root == null) { MessageBox.Show("Проект не открыт."); return; }
+            if (root == null) { MessageDlg.Show("Проект не открыт."); return; }
 
             var models = FindOurTerrainModels();
             if (models.Count == 0)
             {
-                MessageBox.Show("В проекте нет моделей рельефа, созданных этим модулем.", "Загрузка рельефа");
+                MessageDlg.Show("В проекте нет моделей рельефа, созданных этим модулем.");
                 return;
             }
 
@@ -215,8 +216,9 @@ namespace DemLoader
             if (target == null) return;
 
             string name = System.IO.Path.GetFileNameWithoutExtension(PluginCoreOps.GetFileName(target) ?? string.Empty);
-            if (MessageBox.Show("Удалить модель рельефа «" + name + "» из проекта?", "Загрузка рельефа",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            if (MessageDlg.Show("Удалить модель рельефа «" + name + "» из проекта?",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button1) != DialogResult.Yes)
                 return;
 
             try
@@ -225,7 +227,7 @@ namespace DemLoader
             }
             catch (TerrainWriteException error)
             {
-                MessageBox.Show(error.Message, "Загрузка рельефа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageDlg.Show(error.Message, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
 
@@ -266,7 +268,7 @@ namespace DemLoader
                     }
                     catch (CoordSystemException error)
                     {
-                        MessageBox.Show(error.Message, "Загрузка рельефа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageDlg.Show(error.Message, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                         continue;
                     }
 
@@ -287,11 +289,11 @@ namespace DemLoader
 
                     if (!exported.Ok)
                     {
-                        MessageBox.Show(exported.Error, "Загрузка рельефа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageDlg.Show(exported.Error, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                         return;
                     }
 
-                    MessageBox.Show(exported.Describe(), "Загрузка рельефа", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageDlg.Show(exported.Describe(), MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                     return;
                 }
             }
